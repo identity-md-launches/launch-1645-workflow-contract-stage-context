@@ -1,0 +1,40 @@
+{
+  "kind": "evm_project",
+  "token": {
+    "contract": "LaunchToken",
+    "name": "VisualIdentity.md",
+    "symbol": "VIMD",
+    "decimals": 18
+  },
+  "contracts": [
+    {
+      "contract": "FinalistArtA",
+      "constructorArgs": []
+    },
+    {
+      "contract": "FinalistArtB",
+      "constructorArgs": []
+    },
+    {
+      "contract": "FinalistArtC",
+      "constructorArgs": []
+    },
+    {
+      "contract": "BrandGenesisNFT",
+      "constructorArgs": [
+        "$token",
+        "0x0000ec93127baa929e58e97dd0095a2bfb38ec1d",
+        "$contract:FinalistArtA",
+        "$contract:FinalistArtB",
+        "$contract:FinalistArtC"
+      ]
+    }
+  ],
+  "pool": {
+    "pairedCurrency": "0xd34a99bc0f67ae1bbd63c660e6d0b0dd03e263b7",
+    "fee": 12500,
+    "tickSpacing": 60,
+    "initialPrice": "79228162514264337593543950336"
+  },
+  "notes": "VisualIdentity.md, Edition 1: a community proposal for IMD's visual identity, decided by identity.md seat holders. LaunchToken (VIMD) is the standard fixed-supply launch token with no constructor arguments. FinalistArtA, FinalistArtB and FinalistArtC are immutable, argument-free contracts that each return one finalist's logomark SVG exactly as published under art/finalist-a, -b and -c. BrandGenesisNFT is the ERC-721 'Visual Identity Genesis' (VIMDG); its constructor takes, in order, this launch's token ($token) as the VIMD burned by mint(uint8), the identity.md seat collection on Ethereum mainnet (0x0000ec93127baa929e58e97dd0095a2bfb38ec1d, an address-typed argument fixed by the approved workflow) whose ownerOf gates vote(uint256,uint8), and the three finalist art contracts ($contract:FinalistArtA, B and C) as the tokenURI image sources. The constructor stores these addresses and sets VOTE_END to deployment plus 7 days; it calls no other contract, so it runs on an empty chain. BrandGenesisNFT has no owner, admin, pause, upgrade, setter or withdraw function, so no constructor argument grants a privileged role and $owner is not used anywhere in this launch. No contract here is allocated, reserved or sent any of the supply; the factory splits it (the swarm's 10% to the MerkleDistributor, 90% to the pool). Burn mints transfer 50,000 VIMD from the caller to 0x000000000000000000000000000000000000dEaD; that address is a burn sink inside mint(uint8), never a constructor argument. The pool pairs VIMD with IMD at the launch policy's 1.25% fee, tick spacing 60; the deployer derives the opening price from the policy's opening market cap, so initialPrice is written as the launch facts give it."
+}
